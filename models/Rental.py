@@ -1,6 +1,5 @@
-from sqlalchemy import Date, Column, Integer, ForeignKey, PrimaryKeyConstraint, Float, DATETIME
+from sqlalchemy import Date, Column, Integer, ForeignKey
 from sqlalchemy.orm import relationship
-
 from config.base import Base
 
 class Rental(Base):
