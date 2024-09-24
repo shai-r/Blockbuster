@@ -6,7 +6,6 @@ from typing import List
 from config.base import session_factory
 from models import User, Subscription
 
-
 def insert_user(user: User) -> Result[User, str]:
     with session_factory() as session:
         try:
