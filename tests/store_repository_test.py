@@ -4,7 +4,7 @@ from returns.maybe import Nothing
 from returns.result import Failure
 from repository.database import create_tables, drop_tables
 from repository.store_repository import insert_store, find_store_by_id, find_stores_by_store_name, \
-    find_store_by_store_store, delete_store, update_store, find_subscriptions_of_store_by_id
+    find_store_by_store_state, delete_store, update_store, find_subscriptions_of_store_by_id
 from models import Store
 import toolz as t
 from operator import eq
@@ -35,9 +35,9 @@ def test_find_stores_by_user_name(setup_database):
     assert len(stores) == 0
 
 def test_find_store_by_store_store(setup_database):
-    store = find_store_by_store_store('NY')
+    store = find_store_by_store_state('NY')
     assert len(store) > 0
-    store = find_store_by_store_store('')
+    store = find_store_by_store_state('')
     assert len(store) == 0
 
 def test_delete_store(setup_database):

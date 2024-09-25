@@ -29,7 +29,7 @@ def find_stores_by_store_name(s_name :str) -> List[Store]:
     with session_factory() as session:
         return session.query(Store).filter(Store.store_name == s_name).all()
 
-def find_store_by_store_store(s_state :str) -> List[Store]:
+def find_store_by_store_state(s_state :str) -> List[Store]:
     with session_factory() as session:
         return session.query(Store).filter(Store.store_state == s_state).all()
 
