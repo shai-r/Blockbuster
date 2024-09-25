@@ -18,6 +18,10 @@ def insert_subscriber(subscriber: Subscriber) -> Result[Subscriber, str]:
             session.rollback()
             return Failure(str(e))
 
+def get_all_subscribers():
+    with session_factory() as session:
+        return session.query(Subscriber).all()
+
 def find_subscriber_by_id(s_id: int) -> Maybe[Subscriber]:
     with session_factory() as session:
         return Maybe.from_optional(

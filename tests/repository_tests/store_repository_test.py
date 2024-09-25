@@ -4,7 +4,7 @@ from returns.maybe import Nothing
 from returns.result import Failure
 from repository.database import create_tables, drop_tables
 from repository.store_repository import insert_store, find_store_by_id, find_stores_by_store_name, \
-    find_store_by_store_state, delete_store, update_store, find_subscriptions_of_store_by_id
+    find_store_by_store_state, delete_store, update_store, find_subscriptions_of_store_by_id, get_all_stores
 from models import Store
 import toolz as t
 from operator import eq
@@ -21,6 +21,10 @@ def test_insert_store(setup_database):
     store = insert_store(Store(store_name='Shalom store', store_state='NG', store_city='BRO',
                                store_address='Kadachat 99', rental_fee=45.4, late_fee=4.54))
     assert store.unwrap().id is not None
+
+def test_get_all_stores(setup_database):
+    stores = get_all_stores()
+    assert len(stores) > 0
 
 def test_find_store_by_id(setup_database):
     store = find_store_by_id(1)

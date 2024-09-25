@@ -5,7 +5,8 @@ from returns.result import Failure
 from repository.database import create_tables, drop_tables
 from repository.store_repository import insert_store
 from repository.subscriber_repository import insert_subscriber, find_subscriber_by_id, \
-    find_all_subscribers_who_owe_more_than, delete_subscriber, update_subscriber, find_rentals_of_subscriber_by_id
+    find_all_subscribers_who_owe_more_than, delete_subscriber, update_subscriber, find_rentals_of_subscriber_by_id, \
+    get_all_subscribers
 from models import Subscriber, User, Store
 import toolz as t
 from operator import eq
@@ -26,6 +27,10 @@ def setup_database():
 def test_insert_subscription(setup_database):
     subscription = insert_subscriber(Subscriber(user_id=1, store_id=1, total_payment=66.539))
     assert subscription.unwrap().id is not None
+
+def test_get_all_subscribers(setup_database):
+    subscribers = get_all_subscribers()
+    assert len(subscribers) > 0
 
 def test_find_subscription_by_id(setup_database):
     subscription = find_subscriber_by_id(1)

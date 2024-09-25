@@ -17,6 +17,10 @@ def insert_store(store: Store) -> Result[Store, str]:
             session.rollback()
             return Failure(str(e))
 
+def get_all_stores():
+    with session_factory() as session:
+        return session.query(Store).all()
+
 def find_store_by_id(s_id: int) -> Maybe[Store]:
     with session_factory() as session:
         return Maybe.from_optional(

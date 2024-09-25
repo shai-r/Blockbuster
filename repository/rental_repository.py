@@ -19,6 +19,10 @@ def insert_rental(rental: Rental) -> Result[Rental, str]:
             session.rollback()
             return Failure(str(e))
 
+def get_all_rentals():
+    with session_factory() as session:
+        return session.query(Rental).all()
+
 def find_rental_by_id(r_id: int) -> Maybe[Rental]:
     with session_factory() as session:
         return Maybe.from_optional(

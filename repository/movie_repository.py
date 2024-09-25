@@ -17,6 +17,10 @@ def insert_movie(movie: Movie) -> Result[Movie, str]:
             session.rollback()
             return Failure(str(e))
 
+def get_all_movies():
+    with session_factory() as session:
+        return session.query(Movie).all()
+
 def find_movie_by_id(m_id: int) -> Maybe[Movie]:
     with session_factory() as session:
         return Maybe.from_optional(

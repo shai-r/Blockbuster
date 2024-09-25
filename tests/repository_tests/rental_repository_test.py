@@ -7,7 +7,7 @@ from repository.database import create_tables, drop_tables
 from repository.movie_repository import insert_movie
 from repository.store_repository import insert_store
 from repository.rental_repository import insert_rental, find_rental_by_id, find_all_rentals_by_rental_date, \
-    find_all_rentals_by_return_date, delete_rental, update_rental
+    find_all_rentals_by_return_date, delete_rental, update_rental, get_all_rentals
 from models import Subscriber, Rental, Store, User, Movie
 import toolz as t
 from operator import eq
@@ -31,6 +31,10 @@ def setup_database():
 def test_insert_rental(setup_database):
     subscription = insert_rental(Rental(subscription_id=1, movie_id=1, rental_date=datetime.now().date()))
     assert subscription.unwrap().id is not None
+
+def test_get_all_rentals(setup_database):
+    rentals = get_all_rentals()
+    assert len(rentals) > 0
 
 def test_find_rental_by_id(setup_database):
     rental = find_rental_by_id(1)

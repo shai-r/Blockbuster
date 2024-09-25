@@ -4,7 +4,7 @@ from returns.maybe import Nothing
 from returns.result import Failure
 from repository.database import create_tables, drop_tables
 from repository.user_repository import insert_user, find_user_by_id, find_users_by_user_name, find_user_by_email, \
-    delete_user, update_user, find_subscriptions_of_user_by_id
+    delete_user, update_user, find_subscriptions_of_user_by_id, get_all_users
 from models import User
 import toolz as t
 from operator import eq
@@ -19,6 +19,10 @@ def setup_database():
 def test_insert_user(setup_database):
     user = insert_user(User(user_name='Shalom', user_email='shalom@gmail.com', user_phone='055234561'))
     assert user.unwrap().id is not None
+
+def test_get_all_users(setup_database):
+    users = get_all_users()
+    assert len(users) > 0
 
 def test_find_user_by_id(setup_database):
     user = find_user_by_id(1)

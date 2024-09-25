@@ -17,6 +17,10 @@ def insert_user(user: User) -> Result[User, str]:
             session.rollback()
             return Failure(str(e))
 
+def get_all_users():
+    with session_factory() as session:
+        return session.query(User).all()
+
 def find_user_by_id(u_id: int) -> Maybe[User]:
     with session_factory() as session:
         return Maybe.from_optional(

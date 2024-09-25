@@ -4,7 +4,7 @@ from returns.maybe import Nothing
 from returns.result import Failure
 from repository.database import create_tables, drop_tables
 from repository.movie_repository import insert_movie, find_movie_by_id, delete_movie, update_movie, \
-    find_movies_by_movie_gener, find_movie_by_movie_year, find_rentals_of_movie_by_id
+    find_movies_by_movie_gener, find_movie_by_movie_year, find_rentals_of_movie_by_id, get_all_movies
 from models import Movie
 import toolz as t
 from operator import eq
@@ -19,6 +19,10 @@ def setup_database():
 def test_insert_movie(setup_database):
     movie = insert_movie(Movie(movie_title='Shais movie 2', movie_gener='shais comedy', movie_year=2000))
     assert movie.unwrap().id is not None
+
+def test_get_all_movies(setup_database):
+    movies = get_all_movies()
+    assert len(movies) > 0
 
 def test_find_user_by_id(setup_database):
     movie = find_movie_by_id(1)
