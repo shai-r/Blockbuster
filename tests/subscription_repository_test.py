@@ -3,7 +3,6 @@ import pytest
 from returns.maybe import Nothing
 from returns.result import Failure
 from repository.database import create_tables, drop_tables
-from repository.movie_repository import insert_movie
 from repository.store_repository import insert_store
 from repository.subscriber_repository import insert_subscriber, find_subscriber_by_id, \
     find_all_subscribers_who_owe_more_than, delete_subscriber, update_subscriber, find_rentals_of_subscriber_by_id

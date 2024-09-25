@@ -4,7 +4,7 @@ from returns.result import Result, Success, Failure
 from sqlalchemy.exc import SQLAlchemyError
 from typing import List
 from config.base import session_factory
-from models import Subscriber, Store, Rental
+from models import Subscriber, Rental
 
 
 def insert_subscriber(subscriber: Subscriber) -> Result[Subscriber, str]:
