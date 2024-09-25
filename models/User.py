@@ -10,10 +10,11 @@ class User(Base):
     user_email = Column(String(63), unique=True, nullable=False)
     user_phone = Column(Integer, nullable=False)
 
-    subscriptions = relationship(
-        "Subscription",
+    subscribers = relationship(
+        "Subscriber",
         lazy="joined",
-        back_populates="user"
+        back_populates="user",
+        cascade='all, delete-orphan'
     )
 
     def __repr__(self):

@@ -4,7 +4,7 @@ from returns.result import Result, Success, Failure
 from sqlalchemy.exc import SQLAlchemyError
 from typing import List
 from config.base import session_factory
-from models import User, Subscription
+from models import User, Subscriber
 
 def insert_user(user: User) -> Result[User, str]:
     with session_factory() as session:
@@ -67,10 +67,10 @@ def update_user(u_id: int, user: User) -> Result[User, str]:
             session.rollback()
             return Failure(str(e))
 
-def find_subscriptions_of_user_by_id(u_id:int) -> List[Subscription]:
+def find_subscriptions_of_user_by_id(u_id:int) -> List[Subscriber]:
     with session_factory() as session:
         return (find_user_by_id(u_id)
                 .map(session.merge)
-                .map(attrgetter("subscriptions"))
+                .map(attrgetter("subscribers"))
                 .value_or([])
         )

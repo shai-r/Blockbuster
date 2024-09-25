@@ -13,7 +13,8 @@ class Movie(Base):
     rentals = relationship(
         "Rental",
         lazy="joined",
-        back_populates="movie"
+        back_populates="movie",
+        cascade='all, delete-orphan'
     )
 
     def __repr__(self):

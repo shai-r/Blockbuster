@@ -13,10 +13,11 @@ class Store(Base):
     rental_fee = Column(Float, default=0.0)
     late_fee = Column(Float, default=0.0)
 
-    subscriptions = relationship(
-        "Subscription",
+    subscribers = relationship(
+        "Subscriber",
         lazy="joined",
-        back_populates="store"
+        back_populates="store",
+        cascade='all, delete-orphan'
     )
 
     def __repr__(self):
